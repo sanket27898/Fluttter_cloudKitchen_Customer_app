@@ -7,6 +7,7 @@ import '../provider/auth_provider.dart';
 import '../screens/welcome_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const String routeName = '/homeScreen';
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthProvider>(context);

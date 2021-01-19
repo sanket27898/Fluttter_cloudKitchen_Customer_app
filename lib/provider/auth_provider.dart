@@ -109,8 +109,8 @@ class AuthProvider with ChangeNotifier {
                     if (user != null) {
                       Navigator.of(context).pop();
                       //don't want come back to welcome screen after logged in
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeScreen()));
+                      Navigator.pushReplacementNamed(
+                          context, HomeScreen.routeName);
                     } else {
                       print('Login failed');
                     }

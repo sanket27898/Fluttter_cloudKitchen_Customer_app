@@ -5,6 +5,8 @@ import '../provider/auth_provider.dart';
 import '../screens/onboard_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  static const String routeName = '/welcomeScreen';
+
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthProvider>(context);
