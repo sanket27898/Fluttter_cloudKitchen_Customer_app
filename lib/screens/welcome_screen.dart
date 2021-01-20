@@ -1,7 +1,9 @@
+import 'package:first_firebase_flutter_project/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/auth_provider.dart';
+import '../provider/location_provider.dart';
 import '../screens/onboard_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -114,6 +116,7 @@ class WelcomeScreen extends StatelessWidget {
       );
     }
 
+    final locationData = Provider.of<LocationProvider>(context, listen: false);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -145,7 +148,15 @@ class WelcomeScreen extends StatelessWidget {
                   'SET DELIVERY LOCATION',
                   style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  await locationData.getCurrentPosition();
+                  if (locationData.permissionAllowed == true) {
+                    Navigator.pushReplacementNamed(
+                        context, MapScreen.routeName);
+                  } else {
+                    print('permission not allowed');
+                  }
+                },
               ),
               SizedBox(height: 20),
               InkWell(
