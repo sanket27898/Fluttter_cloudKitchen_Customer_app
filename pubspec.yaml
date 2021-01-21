@@ -33,6 +33,7 @@ dependencies:
   google_maps_flutter: ^1.1.1
   geocoder: ^0.2.1
   flutter_spinkit: ^4.1.2+1
+  shared_preferences: ^0.5.12+4
 
 
 dev_dependencies:

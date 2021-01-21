@@ -163,6 +163,8 @@ class _MapScreenState extends State<MapScreen> {
                               absorbing: _locating ? true : false,
                               child: FlatButton(
                                 onPressed: () {
+                                  // save address in Shared Preferences
+                                  locationData.savePrefs();
                                   if (_loggedIn == false) {
                                     Navigator.pushNamed(
                                         context, LoginScreen.routeName);
