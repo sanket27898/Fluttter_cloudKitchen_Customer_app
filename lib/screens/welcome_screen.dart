@@ -151,7 +151,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onTap: () {},
               child: Text(
                 'SKIP',
-                style: TextStyle(color: Colors.orange),
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
           ),
@@ -166,7 +166,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               SizedBox(height: 20),
               FlatButton(
-                color: Colors.orange,
+                color: Theme.of(context).primaryColor,
                 child: locationData.loading
                     ? CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
@@ -211,7 +211,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         text: 'Login',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.orange,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ],
