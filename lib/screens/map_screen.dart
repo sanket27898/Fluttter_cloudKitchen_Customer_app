@@ -108,86 +108,97 @@ class _MapScreenState extends State<MapScreen> {
                 color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _locating
-                          ? LinearProgressIndicator(
-                              backgroundColor: Colors.transparent,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  Theme.of(context).primaryColor),
-                            )
-                          : Container(),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: TextButton.icon(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.location_searching,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            label: Flexible(
-                              child: Text(
-                                _locating
-                                    ? 'Locating....'
-                                    : locationData.selectedAddress.featureName,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _locating
+                            ? LinearProgressIndicator(
+                                backgroundColor: Colors.transparent,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Theme.of(context).primaryColor),
+                              )
+                            : Container(),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: TextButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.location_searching,
+                                color: Theme.of(context).primaryColor,
                               ),
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Text(
-                          _locating
-                              ? ''
-                              : locationData.selectedAddress.addressLine,
-                          style: TextStyle(color: Colors.black54),
+                              label: Flexible(
+                                child: Text(
+                                  _locating
+                                      ? 'Locating....'
+                                      : locationData
+                                          .selectedAddress.featureName,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              )),
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width -
-                              40, //40 is padding from both side ..20 per each
-                          child: AbsorbPointer(
-                            absorbing: _locating ? true : false,
-                            child: FlatButton(
-                              onPressed: () {
-                                if (_loggedIn == false) {
-                                  Navigator.pushNamed(
-                                      context, LoginScreen.routeName);
-                                } else {
-                                  _auth.updateUser(
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Text(
+                            _locating
+                                ? ''
+                                : locationData.selectedAddress.addressLine,
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width -
+                                40, //40 is padding from both side ..20 per each
+                            child: AbsorbPointer(
+                              absorbing: _locating ? true : false,
+                              child: FlatButton(
+                                onPressed: () {
+                                  if (_loggedIn == false) {
+                                    Navigator.pushNamed(
+                                        context, LoginScreen.routeName);
+                                  } else {
+                                    setState(() {
+                                      _auth.latitude = locationData.latitude;
+                                      _auth.longitude = locationData.longitude;
+                                      _auth.address = locationData
+                                          .selectedAddress.addressLine;
+                                    });
+                                    _auth
+                                        .updateUser(
                                       id: user.uid,
                                       number: user.phoneNumber,
-                                      latitude: locationData.latitude,
-                                      longitude: locationData.longitude,
-                                      address: locationData
-                                          .selectedAddress.addressLine);
-                                  Navigator.pushNamed(
-                                      context, HomeScreen.routeName);
-                                }
-                              },
-                              color: _locating
-                                  ? Colors.grey
-                                  : Theme.of(context).primaryColor,
-                              child: Text(
-                                'CONFIRM LOCATION',
-                                style: TextStyle(color: Colors.white),
+                                    )
+                                        .then((value) {
+                                      if (value == true) {
+                                        Navigator.pushNamed(
+                                            context, HomeScreen.routeName);
+                                      }
+                                    });
+                                  }
+                                },
+                                color: _locating
+                                    ? Colors.grey
+                                    : Theme.of(context).primaryColor,
+                                child: Text(
+                                  'CONFIRM LOCATION',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )),

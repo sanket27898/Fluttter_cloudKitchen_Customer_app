@@ -101,9 +101,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     .verifyPhone(
                                   context: context,
                                   number: number,
-                                  latitude: null,
-                                  longitude: null,
-                                  address: null,
                                 )
                                     .then((value) {
                                   _phoneNumberController.clear();
@@ -134,7 +131,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             );
           },
         ),
-      );
+      ).whenComplete(() {
+        setState(() {
+          auth.loading = false;
+          _phoneNumberController.clear();
+        });
+      });
     }
 
     final locationData = Provider.of<LocationProvider>(context, listen: false);
@@ -195,6 +197,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               SizedBox(height: 20),
               InkWell(
                 onTap: () {
+                  setState(() {
+                    auth.screen = 'Login';
+                  });
                   showBottomsheet(context);
                 },
                 child: RichText(

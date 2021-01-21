@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_firebase_flutter_project/provider/location_provider.dart';
+import 'package:first_firebase_flutter_project/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../services/user_services.dart';
@@ -14,14 +15,12 @@ class AuthProvider with ChangeNotifier {
   UserServices _userServices = UserServices();
   bool loading = false;
   LocationProvider locationData = LocationProvider();
+  String screen;
+  double latitude;
+  double longitude;
+  String address;
 
-  Future<void> verifyPhone({
-    BuildContext context,
-    String number,
-    double latitude,
-    double longitude,
-    String address,
-  }) async {
+  Future<void> verifyPhone({BuildContext context, String number}) async {
     print("saket$number");
 
     this.loading = true;
@@ -32,8 +31,8 @@ class AuthProvider with ChangeNotifier {
       // ANDROID ONLY!
       print("varifiction Completed sanket");
       print("varifiction Completed sanket$credential");
-      // this.loading = false;
-      // notifyListeners();
+      this.loading = false;
+      notifyListeners();
 
       // Sign the user in (or link) with the auto-generated credential
       await _auth.signInWithCredential(credential);
@@ -54,7 +53,7 @@ class AuthProvider with ChangeNotifier {
       print(" smsOtpSend sanket");
       this.verificationId = verId;
       // open dialog to enter received OTP SMS
-      smsOtpDialog(context, number, latitude, longitude, address);
+      smsOtpDialog(context, number);
     };
 
     try {
@@ -70,14 +69,14 @@ class AuthProvider with ChangeNotifier {
       );
     } catch (e) {
       this.error = e.toString();
+      this.loading = false;
       notifyListeners();
       print("sanket $e");
       print(e);
     }
   }
 
-  Future<bool> smsOtpDialog(BuildContext context, String number,
-      double latitude, double longitude, String address) {
+  Future<bool> smsOtpDialog(BuildContext context, String number) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -119,33 +118,33 @@ class AuthProvider with ChangeNotifier {
                     final User user =
                         (await _auth.signInWithCredential(phoneAuthCredential))
                             .user;
-
-                    if (locationData.selectedAddress != null) {
-                      updateUser(
-                        id: user.uid,
-                        number: user.phoneNumber,
-                        latitude: locationData.latitude,
-                        longitude: locationData.longitude,
-                        address: locationData.selectedAddress.addressLine,
-                      );
-                    } else {
-                      // create User data in fireStore after user successfully registered,
-
-                      _createUser(
-                        id: user.uid,
-                        number: user.phoneNumber,
-                        latitude: latitude,
-                        longitude: longitude,
-                        address: address,
-                      );
-                    }
-
-                    // navigate to home page after login
                     if (user != null) {
-                      Navigator.of(context).pop();
-                      //don't want come back to welcome screen after logged in
-                      Navigator.pushReplacementNamed(
-                          context, HomeScreen.routeName);
+                      this.loading = false;
+                      notifyListeners();
+                      _userServices.getUserById(user.uid).then((snapShot) {
+                        if (snapShot.exists) {
+                          //user data already exists
+                          if (this.screen == 'Login') {
+                            //need to check user data already exists in db or not.
+                            //if its 'login'. no new data, so no need to update
+                            Navigator.pushReplacementNamed(
+                                context, HomeScreen.routeName);
+                          } else {
+                            //need to update new selected address
+                            print(
+                                '${locationData.latitude}:${locationData.longitude}');
+                            updateUser(id: user.uid, number: user.phoneNumber);
+                            Navigator.pushReplacementNamed(
+                                context, HomeScreen.routeName);
+                          }
+                        } else {
+                          //user data does not exists
+                          //will create new data in db
+                          _createUser(id: user.uid, number: user.phoneNumber);
+                          Navigator.pushReplacementNamed(
+                              context, HomeScreen.routeName);
+                        }
+                      });
                     } else {
                       print('Login failed');
                     }
@@ -164,42 +163,41 @@ class AuthProvider with ChangeNotifier {
               ),
             ],
           );
-        });
+        }).whenComplete(() {
+      this.loading = false;
+      notifyListeners();
+    });
   }
 
-  void _createUser(
-      {String id,
-      String number,
-      double latitude,
-      double longitude,
-      String address}) {
+  void _createUser({String id, String number}) {
     print("_create User");
     _userServices.createUserData({
       'id': id,
       'number': number,
-      'latitude': latitude,
-      'longitude': longitude,
-      'address': address
+      'latitude': this.latitude,
+      'longitude': this.longitude,
+      'address': this.address,
     });
     this.loading = false;
     notifyListeners();
   }
 
-  void updateUser(
-      {String id,
-      String number,
-      double latitude,
-      double longitude,
-      String address}) {
-    print("_create User");
-    _userServices.updateUserData({
-      'id': id,
-      'number': number,
-      'latitude': latitude,
-      'longitude': longitude,
-      'address': address
-    });
-    this.loading = false;
-    notifyListeners();
+  Future<bool> updateUser({String id, String number}) async {
+    try {
+      print("_update User");
+      _userServices.updateUserData({
+        'id': id,
+        'number': number,
+        'latitude': this.latitude,
+        'longitude': this.longitude,
+        'address': this.address,
+      });
+      this.loading = false;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      print('Error $e');
+      return false;
+    }
   }
 }
