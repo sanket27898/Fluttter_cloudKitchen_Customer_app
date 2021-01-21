@@ -6,9 +6,14 @@ import '../provider/auth_provider.dart';
 import '../provider/location_provider.dart';
 import '../screens/onboard_screen.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   static const String routeName = '/welcomeScreen';
 
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthProvider>(context);
@@ -85,23 +90,39 @@ class WelcomeScreen extends StatelessWidget {
                           child: AbsorbPointer(
                             absorbing: _validPhoneNumber ? false : true,
                             child: FlatButton(
-                              color: _validPhoneNumber
-                                  ? Theme.of(context).primaryColor
-                                  : Colors.grey,
-                              child: Text(
-                                _validPhoneNumber
-                                    ? 'CONTINUE'
-                                    : 'ENTER PHONE NUMBER',
-                                style: TextStyle(color: Colors.white),
-                              ),
                               onPressed: () {
+                                myState(() {
+                                  auth.loading = true;
+                                });
                                 String number =
                                     '+91${_phoneNumberController.text}';
                                 print(number);
-                                auth.verifyPhone(context, number).then((value) {
+                                auth
+                                    .verifyPhone(
+                                  context: context,
+                                  number: number,
+                                  latitude: null,
+                                  longitude: null,
+                                  address: null,
+                                )
+                                    .then((value) {
                                   _phoneNumberController.clear();
                                 });
                               },
+                              color: _validPhoneNumber
+                                  ? Theme.of(context).primaryColor
+                                  : Colors.grey,
+                              child: auth.loading
+                                  ? CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white),
+                                    )
+                                  : Text(
+                                      _validPhoneNumber
+                                          ? 'CONTINUE'
+                                          : 'ENTER PHONE NUMBER',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                             ),
                           ),
                         ),
@@ -144,17 +165,30 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(height: 20),
               FlatButton(
                 color: Colors.orange,
-                child: Text(
-                  'SET DELIVERY LOCATION',
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: locationData.loading
+                    ? CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      )
+                    : Text(
+                        'SET DELIVERY LOCATION',
+                        style: TextStyle(color: Colors.white),
+                      ),
                 onPressed: () async {
+                  setState(() {
+                    locationData.loading = true;
+                  });
                   await locationData.getCurrentPosition();
                   if (locationData.permissionAllowed == true) {
                     Navigator.pushReplacementNamed(
                         context, MapScreen.routeName);
+                    setState(() {
+                      locationData.loading = false;
+                    });
                   } else {
                     print('permission not allowed');
+                    setState(() {
+                      locationData.loading = false;
+                    });
                   }
                 },
               ),

@@ -1,4 +1,5 @@
 import 'package:first_firebase_flutter_project/provider/location_provider.dart';
+import 'package:first_firebase_flutter_project/screens/login_screen.dart';
 import 'package:first_firebase_flutter_project/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (ctx) => HomeScreen(),
         WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
         MapScreen.routeName: (ctx) => MapScreen(),
+        LoginScreen.routeName: (ctx) => LoginScreen(),
       },
     );
   }
