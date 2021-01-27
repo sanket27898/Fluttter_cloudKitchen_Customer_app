@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:first_firebase_flutter_project/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -24,7 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
         if (user == null) {
           Navigator.pushReplacementNamed(context, WelcomeScreen.routeName);
         } else {
-          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+          Navigator.pushReplacementNamed(context, LandingScreen.routeName);
+          //always will go to landing screen and will decide where to go based on location set or not
         }
       });
     });

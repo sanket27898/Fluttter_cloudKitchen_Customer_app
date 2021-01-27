@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_firebase_flutter_project/provider/location_provider.dart';
+import 'package:first_firebase_flutter_project/screens/landing_screen.dart';
 import 'package:first_firebase_flutter_project/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ class AuthProvider with ChangeNotifier {
   double latitude;
   double longitude;
   String address;
+  String location;
 
   Future<void> verifyPhone({BuildContext context, String number}) async {
     print("saket$number");
@@ -128,7 +130,7 @@ class AuthProvider with ChangeNotifier {
                             //need to check user data already exists in db or not.
                             //if its 'login'. no new data, so no need to update
                             Navigator.pushReplacementNamed(
-                                context, HomeScreen.routeName);
+                                context, LandingScreen.routeName);
                           } else {
                             //need to update new selected address
                             print(
@@ -142,7 +144,7 @@ class AuthProvider with ChangeNotifier {
                           //will create new data in db
                           _createUser(id: user.uid, number: user.phoneNumber);
                           Navigator.pushReplacementNamed(
-                              context, HomeScreen.routeName);
+                              context, LandingScreen.routeName);
                         }
                       });
                     } else {
@@ -177,6 +179,7 @@ class AuthProvider with ChangeNotifier {
       'latitude': this.latitude,
       'longitude': this.longitude,
       'address': this.address,
+      'location': this.location,
     });
     this.loading = false;
     notifyListeners();
@@ -191,6 +194,7 @@ class AuthProvider with ChangeNotifier {
         'latitude': this.latitude,
         'longitude': this.longitude,
         'address': this.address,
+        'location': this.location,
       });
       this.loading = false;
       notifyListeners();

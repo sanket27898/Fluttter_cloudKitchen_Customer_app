@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_firebase_flutter_project/provider/location_provider.dart';
 import 'package:first_firebase_flutter_project/screens/map_screen.dart';
+import 'package:first_firebase_flutter_project/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,7 +69,9 @@ class _MyAppBarState extends State<MyAppBar> {
             ),
             Flexible(
               child: Text(
-                _address,
+                _address == null
+                    ? 'Press here to set delivery Location'
+                    : _address,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Colors.white,
@@ -80,12 +84,23 @@ class _MyAppBarState extends State<MyAppBar> {
       ),
       actions: [
         IconButton(
+          onPressed: () {
+            //  auth.error = '';
+            FirebaseAuth.instance.signOut();
+            Navigator.pushReplacementNamed(context, WelcomeScreen.routeName);
+          },
+          icon: Icon(
+            Icons.power_settings_new,
+            color: Colors.white,
+          ),
+        ),
+        IconButton(
           onPressed: () {},
           icon: Icon(
             Icons.account_circle_outlined,
             color: Colors.white,
           ),
-        )
+        ),
       ],
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(56),

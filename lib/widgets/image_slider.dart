@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -22,9 +22,11 @@ class _ImageSliderState extends State<ImageSlider> {
   Future getSliderImageFromDb() async {
     var _fireStore = FirebaseFirestore.instance;
     QuerySnapshot snapshot = await _fireStore.collection('slider').get();
-    setState(() {
-      _dataLength = snapshot.docs.length;
-    });
+    if (mounted) {
+      setState(() {
+        _dataLength = snapshot.docs.length;
+      });
+    }
     return snapshot.docs;
   }
 
@@ -41,14 +43,14 @@ class _ImageSliderState extends State<ImageSlider> {
                       child: CircularProgressIndicator(),
                     )
                   : Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(top: 8.0),
                       child: CarouselSlider.builder(
                         itemCount: snapShort.data.length,
                         itemBuilder: (context, index) {
                           DocumentSnapshot sliderImage = snapShort.data[index];
                           Map getImage = sliderImage.data();
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
+                          return SizedBox(
+                            width: MediaQuery.of(context).size.width,
                             child: Image.network(
                               getImage['image'],
                               fit: BoxFit.fill,
@@ -56,6 +58,7 @@ class _ImageSliderState extends State<ImageSlider> {
                           );
                         },
                         options: CarouselOptions(
+                            viewportFraction: 1,
                             initialPage: 0,
                             autoPlay: true,
                             height: 180,

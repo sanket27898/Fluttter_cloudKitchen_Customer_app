@@ -1,4 +1,5 @@
 import 'package:first_firebase_flutter_project/provider/location_provider.dart';
+import 'package:first_firebase_flutter_project/screens/landing_screen.dart';
 import 'package:first_firebase_flutter_project/screens/login_screen.dart';
 import 'package:first_firebase_flutter_project/screens/map_screen.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xFF84c225),
         fontFamily: 'Lato',
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
         WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
         MapScreen.routeName: (ctx) => MapScreen(),
         LoginScreen.routeName: (ctx) => LoginScreen(),
+        LandingScreen.routeName: (ctx) => LandingScreen(),
       },
     );
   }

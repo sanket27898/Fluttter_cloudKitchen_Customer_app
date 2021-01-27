@@ -1,5 +1,6 @@
 import 'package:first_firebase_flutter_project/provider/auth_provider.dart';
 import 'package:first_firebase_flutter_project/screens/home_screen.dart';
+import 'package:first_firebase_flutter_project/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +19,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  LatLng currentLocation;
+  LatLng currentLocation = LatLng(37.421632, 122.084664);
   GoogleMapController _mapController;
   bool _locating = false;
   bool _loggedIn = false;
@@ -174,6 +175,8 @@ class _MapScreenState extends State<MapScreen> {
                                       _auth.longitude = locationData.longitude;
                                       _auth.address = locationData
                                           .selectedAddress.addressLine;
+                                      _auth.location = locationData
+                                          .selectedAddress.featureName;
                                     });
                                     _auth
                                         .updateUser(

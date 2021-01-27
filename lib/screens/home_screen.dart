@@ -1,3 +1,4 @@
+import 'package:first_firebase_flutter_project/screens/top_pick_store.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,27 +28,12 @@ class _HomeScreenState extends State<HomeScreen> {
         child: MyAppBar(),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ImageSlider(),
-          RaisedButton(
-            onPressed: () {
-              auth.error = '';
-              FirebaseAuth.instance.signOut().then((value) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WelcomeScreen(),
-                  ),
-                );
-              });
-            },
-            child: Text('Sign out'),
-          ),
-          RaisedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, WelcomeScreen.routeName);
-            },
-            child: Text('home screen'),
+          Container(
+            height: 170,
+            child: TopPickStore(),
           ),
         ],
       ),
