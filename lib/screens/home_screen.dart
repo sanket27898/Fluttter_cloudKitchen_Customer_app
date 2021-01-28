@@ -21,22 +21,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(112),
-        child: MyAppBar(),
-      ),
-      body: ListView(
-        children: [
-          ImageSlider(),
-          Container(
-            color: Colors.white,
-            child: TopPickStore(),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: NearByStores(),
-          ),
-        ],
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [MyAppBar()];
+        },
+        body: ListView(
+          padding: const EdgeInsets.only(top: 0),
+          children: [
+            ImageSlider(),
+            Container(
+              color: Colors.white,
+              child: TopPickStore(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: NearByStores(),
+            ),
+          ],
+        ),
       ),
     );
   }

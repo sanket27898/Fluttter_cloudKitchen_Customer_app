@@ -45,7 +45,7 @@ class _ImageSliderState extends State<ImageSlider> {
                         child: CircularProgressIndicator(),
                       )
                     : Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: const EdgeInsets.only(top: 4.0),
                         child: CarouselSlider.builder(
                           itemCount: snapShort.data.length,
                           itemBuilder: (context, index) {

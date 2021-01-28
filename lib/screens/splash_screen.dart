@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:first_firebase_flutter_project/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
     prefs.setString('address', result['address']);
     prefs.setString('location', result['location']);
     //after update prefs , Navigat to HomeScreen
-    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+    Navigator.pushReplacementNamed(context, MainScreen.routeName);
   }
 
   @override
