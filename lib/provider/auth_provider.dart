@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_firebase_flutter_project/provider/location_provider.dart';
 import 'package:first_firebase_flutter_project/screens/landing_screen.dart';
-import 'package:first_firebase_flutter_project/screens/map_screen.dart';
+
 import 'package:flutter/material.dart';
 
 import '../services/user_services.dart';
@@ -129,6 +128,10 @@ class AuthProvider with ChangeNotifier {
                           if (this.screen == 'Login') {
                             //need to check user data already exists in db or not.
                             //if its 'login'. no new data, so no need to update
+                            if (snapShot.data()['address' != null]) {
+                              Navigator.pushReplacementNamed(
+                                  context, HomeScreen.routeName);
+                            }
                             Navigator.pushReplacementNamed(
                                 context, LandingScreen.routeName);
                           } else {

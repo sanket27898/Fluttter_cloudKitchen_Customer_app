@@ -1,14 +1,13 @@
-import 'package:first_firebase_flutter_project/screens/top_pick_store.dart';
+import 'package:first_firebase_flutter_project/widgets/near_by_store.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/auth_provider.dart';
 
-import '../screens/welcome_screen.dart';
 import '../widgets/image_slider.dart';
 import '../widgets/my_appbar.dart';
+import '../widgets/top_pick_store.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/homeScreen';
@@ -20,20 +19,22 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<AuthProvider>(context);
-
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(112),
         child: MyAppBar(),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: [
           ImageSlider(),
           Container(
-            height: 170,
+            color: Colors.white,
             child: TopPickStore(),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: NearByStores(),
           ),
         ],
       ),

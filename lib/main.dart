@@ -1,13 +1,14 @@
-import 'package:first_firebase_flutter_project/provider/location_provider.dart';
-import 'package:first_firebase_flutter_project/screens/landing_screen.dart';
-import 'package:first_firebase_flutter_project/screens/login_screen.dart';
-import 'package:first_firebase_flutter_project/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 
+import './provider/store_provider.dart';
+import './provider/location_provider.dart';
+import './screens/landing_screen.dart';
+import './screens/login_screen.dart';
+import './screens/map_screen.dart';
 import './provider/auth_provider.dart';
 import './screens/welcome_screen.dart';
 import './screens/home_screen.dart';
@@ -24,6 +25,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (ctx) => LocationProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => StoreProvider(),
         ),
       ],
       child: MyApp(),

@@ -1,9 +1,10 @@
-import 'package:first_firebase_flutter_project/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/auth_provider.dart';
 import '../provider/location_provider.dart';
+
+import '../screens/map_screen.dart';
 import '../screens/onboard_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {

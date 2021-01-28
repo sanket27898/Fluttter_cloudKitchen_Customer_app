@@ -1,6 +1,5 @@
 // for all firebase related services for user
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/user_model.dart';
 
 class UserServices {
   String collection = 'users';

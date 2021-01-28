@@ -1,15 +1,14 @@
-import 'package:first_firebase_flutter_project/provider/auth_provider.dart';
-import 'package:first_firebase_flutter_project/screens/home_screen.dart';
-import 'package:first_firebase_flutter_project/screens/landing_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../provider/location_provider.dart';
+import '../provider/auth_provider.dart';
 
+import '../screens/home_screen.dart';
 import '../screens/login_screen.dart';
 
 class MapScreen extends StatefulWidget {
@@ -19,7 +18,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  LatLng currentLocation = LatLng(37.421632, 122.084664);
+  LatLng currentLocation = LatLng(37.421632, -122.084664);
   GoogleMapController _mapController;
   bool _locating = false;
   bool _loggedIn = false;
@@ -132,8 +131,10 @@ class _MapScreenState extends State<MapScreen> {
                                 child: Text(
                                   _locating
                                       ? 'Locating....'
-                                      : locationData
-                                          .selectedAddress.featureName,
+                                      : locationData.selectedAddress == null
+                                          ? 'Locating...'
+                                          : locationData
+                                              .selectedAddress.featureName,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -148,7 +149,9 @@ class _MapScreenState extends State<MapScreen> {
                           child: Text(
                             _locating
                                 ? ''
-                                : locationData.selectedAddress.addressLine,
+                                : locationData.selectedAddress == null
+                                    ? ''
+                                    : locationData.selectedAddress.addressLine,
                             style: TextStyle(color: Colors.black54),
                           ),
                         ),

@@ -1,6 +1,8 @@
-import 'package:first_firebase_flutter_project/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:dots_indicator/dots_indicator.dart';
+
+import '../constants.dart';
 
 class OnBoardScreen extends StatefulWidget {
   @override
