@@ -1,3 +1,4 @@
+import 'package:first_firebase_flutter_project/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -189,7 +190,7 @@ class _MapScreenState extends State<MapScreen> {
                                         .then((value) {
                                       if (value == true) {
                                         Navigator.pushNamed(
-                                            context, HomeScreen.routeName);
+                                            context, MainScreen.routeName);
                                       }
                                     });
                                   }

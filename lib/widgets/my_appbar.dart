@@ -3,6 +3,7 @@ import 'package:first_firebase_flutter_project/provider/location_provider.dart';
 import 'package:first_firebase_flutter_project/screens/map_screen.dart';
 import 'package:first_firebase_flutter_project/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,7 +44,13 @@ class _MyAppBarState extends State<MyAppBar> {
         onPressed: () {
           locationData.getCurrentPosition();
           if (locationData.permissionAllowed == true) {
-            Navigator.pushNamed(context, MapScreen.routeName);
+            pushNewScreenWithRouteSettings(
+              context,
+              settings: RouteSettings(name: MapScreen.routeName),
+              screen: MapScreen(),
+              withNavBar: false,
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
           } else {
             print('Permission not allowed');
           }
@@ -89,7 +96,14 @@ class _MyAppBarState extends State<MyAppBar> {
           onPressed: () {
             //  auth.error = '';
             FirebaseAuth.instance.signOut();
-            Navigator.pushReplacementNamed(context, WelcomeScreen.routeName);
+            pushNewScreenWithRouteSettings(
+              context,
+              settings: RouteSettings(name: WelcomeScreen.routeName),
+              screen: WelcomeScreen(),
+              withNavBar:
+                  false, //make this false if your are navigating to outside
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
           },
           icon: Icon(
             Icons.power_settings_new,

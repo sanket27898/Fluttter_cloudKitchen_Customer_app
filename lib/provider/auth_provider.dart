@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_firebase_flutter_project/provider/location_provider.dart';
 import 'package:first_firebase_flutter_project/screens/landing_screen.dart';
+import 'package:first_firebase_flutter_project/screens/main_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -130,7 +131,7 @@ class AuthProvider with ChangeNotifier {
                             //if its 'login'. no new data, so no need to update
                             if (snapShot.data()['address' != null]) {
                               Navigator.pushReplacementNamed(
-                                  context, HomeScreen.routeName);
+                                  context, MainScreen.routeName);
                             }
                             Navigator.pushReplacementNamed(
                                 context, LandingScreen.routeName);
@@ -140,7 +141,7 @@ class AuthProvider with ChangeNotifier {
                                 '${locationData.latitude}:${locationData.longitude}');
                             updateUser(id: user.uid, number: user.phoneNumber);
                             Navigator.pushReplacementNamed(
-                                context, HomeScreen.routeName);
+                                context, MainScreen.routeName);
                           }
                         } else {
                           //user data does not exists
