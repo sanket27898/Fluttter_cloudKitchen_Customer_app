@@ -18,7 +18,7 @@ List<Widget> _pages = [
   Column(
     children: [
       Expanded(child: Image.asset('images/enteraddress.png')),
-      Text(
+      const Text(
         'Set Your Delivery Location',
         style: kPageViewTextStyle,
         textAlign: TextAlign.center,
@@ -28,7 +28,7 @@ List<Widget> _pages = [
   Column(
     children: [
       Expanded(child: Image.asset('images/orderfood.png')),
-      Text(
+      const Text(
         'Order Online from Your Favourite Store',
         style: kPageViewTextStyle,
         textAlign: TextAlign.center,
@@ -38,7 +38,7 @@ List<Widget> _pages = [
   Column(
     children: [
       Expanded(child: Image.asset('images/deliverfood.png')),
-      Text(
+      const Text(
         'Quick Deliver to your Doorstep',
         style: kPageViewTextStyle,
         textAlign: TextAlign.center,
@@ -63,7 +63,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         DotsIndicator(
@@ -77,7 +77,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             activeColor: Theme.of(context).primaryColor,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
       ],

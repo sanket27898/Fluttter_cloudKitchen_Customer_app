@@ -11,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: RaisedButton(
-          child: Text('Sign Out'),
+          child: const Text('Sign Out'),
           onPressed: () {
             FirebaseAuth.instance.signOut();
 

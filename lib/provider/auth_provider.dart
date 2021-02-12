@@ -6,7 +6,6 @@ import 'package:first_firebase_flutter_project/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../services/user_services.dart';
-import '../screens/home_screen.dart';
 
 class AuthProvider with ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -85,11 +84,11 @@ class AuthProvider with ChangeNotifier {
           return AlertDialog(
             title: Column(
               children: [
-                Text('Verification code'),
-                SizedBox(
+                const Text('Verification code'),
+                const SizedBox(
                   height: 6,
                 ),
-                Text(
+                const Text(
                   'Enter 6 digit OTP receive as SMS',
                   style: TextStyle(
                     color: Colors.grey,

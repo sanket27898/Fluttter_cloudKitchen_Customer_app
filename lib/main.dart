@@ -40,9 +40,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      showPerformanceOverlay: true,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xFF84c225),
+        primaryColor: const Color(0xFF84c225),
         fontFamily: 'Lato',
       ),
       initialRoute: SplashScreen.routeName,

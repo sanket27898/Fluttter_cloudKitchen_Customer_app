@@ -9,7 +9,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../provider/location_provider.dart';
 import '../provider/auth_provider.dart';
 
-import '../screens/home_screen.dart';
 import '../screens/login_screen.dart';
 
 class MapScreen extends StatefulWidget {
@@ -95,7 +94,7 @@ class _MapScreenState extends State<MapScreen> {
               ),
             ),
           ),
-          Center(
+          const Center(
             child: SpinKitPulse(
               color: Colors.black54,
               size: 100.0,
@@ -119,7 +118,7 @@ class _MapScreenState extends State<MapScreen> {
                                 valueColor: AlwaysStoppedAnimation<Color>(
                                     Theme.of(context).primaryColor),
                               )
-                            : Container(),
+                            : const SizedBox(),
                         Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),
                           child: TextButton.icon(
@@ -137,7 +136,7 @@ class _MapScreenState extends State<MapScreen> {
                                           : locationData
                                               .selectedAddress.featureName,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                     color: Colors.black,
@@ -153,10 +152,10 @@ class _MapScreenState extends State<MapScreen> {
                                 : locationData.selectedAddress == null
                                     ? ''
                                     : locationData.selectedAddress.addressLine,
-                            style: TextStyle(color: Colors.black54),
+                            style: const TextStyle(color: Colors.black54),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Padding(
@@ -198,7 +197,7 @@ class _MapScreenState extends State<MapScreen> {
                                 color: _locating
                                     ? Colors.grey
                                     : Theme.of(context).primaryColor,
-                                child: Text(
+                                child: const Text(
                                   'CONFIRM LOCATION',
                                   style: TextStyle(color: Colors.white),
                                 ),

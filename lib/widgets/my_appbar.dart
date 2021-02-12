@@ -64,12 +64,12 @@ class _MyAppBarState extends State<MyAppBar> {
                 Flexible(
                   child: Text(
                     _location == null ? 'Address not set' : _location,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Icon(
+                const Icon(
                   Icons.edit_outlined,
                   color: Colors.white,
                   size: 15,
@@ -82,7 +82,7 @@ class _MyAppBarState extends State<MyAppBar> {
                     ? 'Press here to set delivery Location'
                     : _address,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 12,
                 ),
@@ -105,14 +105,14 @@ class _MyAppBarState extends State<MyAppBar> {
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             );
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.power_settings_new,
             color: Colors.white,
           ),
         ),
         IconButton(
           onPressed: () {},
-          icon: Icon(
+          icon: const Icon(
             Icons.account_circle_outlined,
             color: Colors.white,
           ),
@@ -125,7 +125,7 @@ class _MyAppBarState extends State<MyAppBar> {
           child: TextField(
             decoration: InputDecoration(
               hintText: 'Search',
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: const Icon(Icons.search),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide.none),

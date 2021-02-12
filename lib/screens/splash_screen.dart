@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/user_services.dart';
 
-import './home_screen.dart';
 import './welcome_screen.dart';
 import '../screens/landing_screen.dart';
 
@@ -71,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset("images/logo.png"),
-              Text(
+              const Text(
                 'Grocery Store',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               )

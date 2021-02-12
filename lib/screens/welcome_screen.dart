@@ -40,21 +40,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           children: [
                             Text(
                               auth.error,
-                              style: TextStyle(color: Colors.red, fontSize: 12),
+                              style: const TextStyle(
+                                  color: Colors.red, fontSize: 12),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                           ],
                         ),
                       ),
                     ),
-                    Text(
+                    const Text(
                       'LOGIN',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    Text(
+                    const Text(
                       'Enter your phone number to proceed',
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
@@ -82,7 +83,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         }
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -111,7 +112,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   ? Theme.of(context).primaryColor
                                   : Colors.grey,
                               child: auth.loading
-                                  ? CircularProgressIndicator(
+                                  ? const CircularProgressIndicator(
                                       valueColor: AlwaysStoppedAnimation<Color>(
                                           Colors.white),
                                     )
@@ -119,7 +120,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       _validPhoneNumber
                                           ? 'CONTINUE'
                                           : 'ENTER PHONE NUMBER',
-                                      style: TextStyle(color: Colors.white),
+                                      style:
+                                          const TextStyle(color: Colors.white),
                                     ),
                             ),
                           ),
@@ -161,18 +163,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               Expanded(
                 child: OnBoardScreen(),
               ),
-              Text(
+              const Text(
                 'Ready to order from your nearest shop?',
                 style: TextStyle(color: Colors.grey),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               FlatButton(
                 color: Theme.of(context).primaryColor,
                 child: locationData.loading
-                    ? CircularProgressIndicator(
+                    ? const CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       )
-                    : Text(
+                    : const Text(
                         'SET DELIVERY LOCATION',
                         style: TextStyle(color: Colors.white),
                       ),
@@ -195,7 +197,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   }
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               InkWell(
                 onTap: () {
                   setState(() {

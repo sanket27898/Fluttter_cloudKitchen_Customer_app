@@ -75,7 +75,7 @@ class _TopPickStoreState extends State<TopPickStore> {
                           height: 30,
                           child: Image.asset('images/like.gif'),
                         ),
-                        Text(
+                        const Text(
                           'Top Store Picks For You',
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
@@ -120,7 +120,7 @@ class _TopPickStoreState extends State<TopPickStore> {
                                       height: 35,
                                       child: Text(
                                         document['shopName'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -130,7 +130,7 @@ class _TopPickStoreState extends State<TopPickStore> {
                                     ),
                                     Text(
                                       '${getDistance(document['location'])} Km',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 10,
                                         fontWeight: FontWeight.bold,
@@ -142,7 +142,7 @@ class _TopPickStoreState extends State<TopPickStore> {
                             );
                           } else {
                             //if no stores
-                            return Container();
+                            return const SizedBox();
                           }
                         }).toList(),
                       ),

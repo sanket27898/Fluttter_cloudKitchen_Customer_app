@@ -22,7 +22,7 @@ class _LandingScreenState extends State<LandingScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
+              child: const Text(
                 'Delivery Address not set',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -31,7 +31,7 @@ class _LandingScreenState extends State<LandingScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
+              child: const Text(
                 'Please update your Delivery Location to find nearest store for you',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -69,7 +69,7 @@ class _LandingScreenState extends State<LandingScreen> {
                               _loading = false;
                             });
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text(
                                     'Please allow permission to find nearest stores for you'),
                               ),
@@ -78,7 +78,7 @@ class _LandingScreenState extends State<LandingScreen> {
                         });
                       }
                     },
-                    child: Text(
+                    child: const Text(
                       'Set Your Location',
                       style: TextStyle(
                         color: Colors.white,

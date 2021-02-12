@@ -65,7 +65,7 @@ class _NearByStoresState extends State<NearByStores> {
                         bottom: 30, top: 30, left: 20, right: 20),
                     child: Center(
                       child: Container(
-                        child: Text(
+                        child: const Text(
                           'Currently we are not servicing in your area ,Please try again later or try another location',
                           textAlign: TextAlign.left,
                           style: TextStyle(
@@ -89,13 +89,13 @@ class _NearByStoresState extends State<NearByStores> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Made by:',
                           style: TextStyle(
                             color: Colors.black54,
                           ),
                         ),
-                        Text(
+                        const Text(
                           'Sanket Jain',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -143,7 +143,7 @@ class _NearByStoresState extends State<NearByStores> {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 8, right: 8, bottom: 10),
-                          child: Text(
+                          child: const Text(
                             'Findout quality products near you',
                             style: TextStyle(
                               fontSize: 12,
@@ -176,7 +176,7 @@ class _NearByStoresState extends State<NearByStores> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Column(
@@ -186,7 +186,7 @@ class _NearByStoresState extends State<NearByStores> {
                                 Container(
                                   child: Text(
                                     document.data()['shopName'],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -194,14 +194,14 @@ class _NearByStoresState extends State<NearByStores> {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
                                 Text(
                                   document.data()['dialog'],
                                   style: kStoreCardStyle,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
                                 Container(
@@ -213,7 +213,7 @@ class _NearByStoresState extends State<NearByStores> {
                                     style: kStoreCardStyle,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
                                 Text(
@@ -221,18 +221,18 @@ class _NearByStoresState extends State<NearByStores> {
                                   overflow: TextOverflow.ellipsis,
                                   style: kStoreCardStyle,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 3,
                                 ),
                                 Row(
                                   // this is to show rating .. will work on rating later
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.star,
                                       size: 12,
                                       color: Colors.grey,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 4,
                                     ),
                                     Text(
@@ -257,7 +257,7 @@ class _NearByStoresState extends State<NearByStores> {
                         child: Stack(
                           children: [
                             Center(
-                              child: Text(
+                              child: const Text(
                                 '**That\'s all Folks** ',
                                 style: TextStyle(
                                   color: Colors.grey,
@@ -274,13 +274,13 @@ class _NearByStoresState extends State<NearByStores> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Made by:',
                                     style: TextStyle(
                                       color: Colors.black54,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     'Sanket Jain',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
