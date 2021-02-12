@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StoreServices {
+  CollectionReference vendorbanner =
+      FirebaseFirestore.instance.collection('vendorbanner');
   getTopPickedStore() {
     //this will show only verified vendor
     //this will show only topPicked vendor by admin

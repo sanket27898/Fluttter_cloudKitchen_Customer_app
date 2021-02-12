@@ -12,17 +12,12 @@ import '../provider/store_provider.dart';
 
 import '../constants.dart';
 
-class NearByStores extends StatefulWidget {
-  @override
-  _NearByStoresState createState() => _NearByStoresState();
-}
-
-class _NearByStoresState extends State<NearByStores> {
-  StoreServices _storeServices = StoreServices();
-  PaginateRefreshedChangeListener refreshedChangeListener =
-      PaginateRefreshedChangeListener();
+class NearByStores extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    StoreServices _storeServices = StoreServices();
+    PaginateRefreshedChangeListener refreshedChangeListener =
+        PaginateRefreshedChangeListener();
     final _storeData = Provider.of<StoreProvider>(context);
     _storeData.getUserLoactionData(context);
 
@@ -42,9 +37,9 @@ class _NearByStoresState extends State<NearByStores> {
           if (!snapShort.hasData) return CircularProgressIndicator();
           //! now we nee to show store 0nly with in 10 km distance
           //! need to confirm even no shop near by or not
-          print(snapShort.data.docs.length);
+          // print(snapShort.data.docs.length);
           List shopDistance = [];
-          for (int i = 0; i < snapShort.data.docs.length; i++) {
+          for (int i = 0; i < snapShort.data.docs.length - 1; i++) {
             var distance = Geolocator.distanceBetween(
               _storeData.userLatitude,
               _storeData.userLongitude,

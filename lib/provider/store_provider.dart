@@ -4,14 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../services/user_services.dart';
-import '../services/store_service.dart';
+// import '../services/store_service.dart';
 
 class StoreProvider with ChangeNotifier {
-  StoreServices _storeServices = StoreServices();
+  // StoreServices _storeServices = StoreServices();
   UserServices _userServices = UserServices();
   User user = FirebaseAuth.instance.currentUser;
   var userLatitude = 0.0;
   var userLongitude = 0.0;
+  String selectedStore;
+  String selectedStoreId;
+
+  getSelectedStore(storeName, storeId) {
+    this.selectedStore = storeName;
+    this.selectedStoreId = storeId;
+    notifyListeners();
+  }
 
   Future<void> getUserLoactionData(context) async {
     _userServices.getUserById(user.uid).then((result) {

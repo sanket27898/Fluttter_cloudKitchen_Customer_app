@@ -1,4 +1,5 @@
 import 'package:first_firebase_flutter_project/screens/main_screen.dart';
+import 'package:first_firebase_flutter_project/screens/vendor_home_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (ctx) => LoginScreen(),
         LandingScreen.routeName: (ctx) => LandingScreen(),
         MainScreen.routeName: (ctx) => MainScreen(),
+        VendorHomeScreen.routeName: (ctx) => VendorHomeScreen(),
       },
     );
   }
