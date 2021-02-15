@@ -40,6 +40,8 @@ class _MyAppBarState extends State<MyAppBar> {
 
       automaticallyImplyLeading: false,
       elevation: 0.0,
+      floating: true,
+      snap: true,
       title: FlatButton(
         onPressed: () {
           locationData.getCurrentPosition();

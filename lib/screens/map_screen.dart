@@ -9,7 +9,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../provider/location_provider.dart';
 import '../provider/auth_provider.dart';
 
-import '../screens/home_screen.dart';
 import '../screens/login_screen.dart';
 
 class MapScreen extends StatefulWidget {
@@ -20,6 +19,7 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   LatLng currentLocation = LatLng(37.421632, -122.084664);
+
   GoogleMapController _mapController;
   bool _locating = false;
   bool _loggedIn = false;

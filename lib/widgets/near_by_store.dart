@@ -12,21 +12,43 @@ import '../provider/store_provider.dart';
 
 import '../constants.dart';
 
-class NearByStores extends StatelessWidget {
+class NearByStores extends StatefulWidget {
+  @override
+  _NearByStoresState createState() => _NearByStoresState();
+}
+
+class _NearByStoresState extends State<NearByStores> {
+  double latitude = 0.0;
+  double longitude = 0.0;
+
+  @override
+  void didChangeDependencies() {
+    final _storeData = Provider.of<StoreProvider>(context);
+    _storeData.determinePosition().then((position) {
+      latitude = position.latitude;
+      longitude = position.longitude;
+    });
+    super.didChangeDependencies();
+  }
+
+  String getDistance(location) {
+    var distance = Geolocator.distanceBetween(
+      latitude,
+      longitude,
+      location.latitude,
+      location.longitude,
+    );
+    var distanceInKm = distance / 1000; //this will show in kilometer
+    return distanceInKm.toStringAsFixed(2);
+  }
+
+  StoreServices _storeServices = StoreServices();
+  PaginateRefreshedChangeListener refreshedChangeListener =
+      PaginateRefreshedChangeListener();
   @override
   Widget build(BuildContext context) {
-    StoreServices _storeServices = StoreServices();
-    PaginateRefreshedChangeListener refreshedChangeListener =
-        PaginateRefreshedChangeListener();
     final _storeData = Provider.of<StoreProvider>(context);
-    _storeData.getUserLoactionData(context);
-
-    String getDistance(location) {
-      var distance = Geolocator.distanceBetween(_storeData.userLatitude,
-          _storeData.userLongitude, location.latitude, location.longitude);
-      var distanceInKm = distance / 1000; //this will show in kilometer
-      return distanceInKm.toStringAsFixed(2);
-    }
+    // _storeData.getUserLoactionData(context);
 
     return Container(
       color: Colors.white,
@@ -34,15 +56,21 @@ class NearByStores extends StatelessWidget {
         stream: _storeServices.getNearByStore(), //will change it soon
         builder:
             (BuildContext context, AsyncSnapshot<QuerySnapshot> snapShort) {
-          if (!snapShort.hasData) return CircularProgressIndicator();
+          if (!snapShort.hasData)
+            return Center(
+                child: Container(
+              height: 50,
+              width: 50,
+              child: CircularProgressIndicator(),
+            ));
           //! now we nee to show store 0nly with in 10 km distance
           //! need to confirm even no shop near by or not
           // print(snapShort.data.docs.length);
           List shopDistance = [];
-          for (int i = 0; i < snapShort.data.docs.length - 1; i++) {
+          for (int i = 0; i < snapShort.data.docs.length; i++) {
             var distance = Geolocator.distanceBetween(
-              _storeData.userLatitude,
-              _storeData.userLongitude,
+              latitude,
+              longitude,
               snapShort.data.docs[i]['location'].latitude,
               snapShort.data.docs[i]['location'].longitude,
             );

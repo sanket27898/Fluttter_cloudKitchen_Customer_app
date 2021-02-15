@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_firebase_flutter_project/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../services/user_services.dart';
 // import '../services/store_service.dart';
@@ -14,10 +16,12 @@ class StoreProvider with ChangeNotifier {
   var userLongitude = 0.0;
   String selectedStore;
   String selectedStoreId;
+  DocumentSnapshot storeDetails;
+  String distance;
 
-  getSelectedStore(storeName, storeId) {
-    this.selectedStore = storeName;
-    this.selectedStoreId = storeId;
+  getSelectedStore(storeDetails, distance) {
+    this.storeDetails = storeDetails;
+    this.distance = distance;
     notifyListeners();
   }
 
@@ -31,5 +35,32 @@ class StoreProvider with ChangeNotifier {
         Navigator.pushReplacementNamed(context, WelcomeScreen.routeName);
       }
     });
+  }
+
+  Future<Position> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permantly denied, we cannot request permissions.');
+    }
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission != LocationPermission.whileInUse &&
+          permission != LocationPermission.always) {
+        return Future.error(
+            'Location permissions are denied (actual value: $permission).');
+      }
+    }
+
+    return await Geolocator.getCurrentPosition();
   }
 }

@@ -6,7 +6,6 @@ import 'package:first_firebase_flutter_project/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../services/user_services.dart';
-import '../screens/home_screen.dart';
 
 class AuthProvider with ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
