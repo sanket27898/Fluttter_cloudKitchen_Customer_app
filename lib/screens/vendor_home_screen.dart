@@ -1,3 +1,4 @@
+import 'package:first_firebase_flutter_project/widgets/category_widget.dart';
 import 'package:first_firebase_flutter_project/widgets/vandor_banner.dart';
 import 'package:first_firebase_flutter_project/widgets/vendor_appbar.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,12 @@ class VendorHomeScreen extends StatelessWidget {
           ];
         },
         body: Column(
-          children: [VendorBanner()],
+          children: [
+            VendorBanner(),
+            Expanded(
+              child: VendorCategories(),
+            ),
+          ],
         ),
       ),
     );
