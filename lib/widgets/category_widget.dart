@@ -56,38 +56,82 @@ class _VendorCategoriesState extends State<VendorCategories> {
           );
         }
         return SingleChildScrollView(
-          child: Wrap(
-            direction: Axis.horizontal,
-            children: snapshot.data.docs.map((DocumentSnapshot document) {
-              return _catList.contains(document.data()['name'])
-                  ? //only if _catList contain the category from selected vendor
-                  Container(
-                      width: 120,
-                      height: 150,
-                      child: Card(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 100,
-                              child: Image.network(
-                                document.data()['image'],
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 8, right: 8, top: 8),
-                              child: Text(
-                                document.data()['name'],
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Material(
+                  elevation: 4,
+                  borderRadius: BorderRadius.circular(6),
+                  child: Container(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      image: DecorationImage(
+                        image: AssetImage('images/burger-closeup.jpg'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Shop by Category',
+                        style: TextStyle(
+                          shadows: <Shadow>[
+                            Shadow(
+                                offset: Offset(2.0, 2.0),
+                                blurRadius: 3.0,
+                                color: Colors.black),
                           ],
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
                         ),
                       ),
-                    )
-                  : Text('');
-            }).toList(),
+                    ),
+                  ),
+                ),
+              ),
+              Wrap(
+                direction: Axis.horizontal,
+                children: snapshot.data.docs.map((DocumentSnapshot document) {
+                  return _catList.contains(document.data()['name'])
+                      ? //only if _catList contain the category from selected vendor
+                      Container(
+                          width: 120,
+                          height: 150,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: .5,
+                                )),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 100,
+                                  child: Image.network(
+                                    document.data()['image'],
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 8, right: 8, top: 8),
+                                  child: Text(
+                                    document.data()['name'],
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      : Text('');
+                }).toList(),
+              ),
+            ],
           ),
         );
       },
