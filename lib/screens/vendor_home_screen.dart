@@ -1,4 +1,7 @@
 import 'package:first_firebase_flutter_project/widgets/category_widget.dart';
+import 'package:first_firebase_flutter_project/widgets/products/best_selling_product.dart';
+import 'package:first_firebase_flutter_project/widgets/products/featured_products.dart';
+import 'package:first_firebase_flutter_project/widgets/products/recently_added_product.dart';
 import 'package:first_firebase_flutter_project/widgets/vandor_banner.dart';
 import 'package:first_firebase_flutter_project/widgets/vendor_appbar.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +19,15 @@ class VendorHomeScreen extends StatelessWidget {
             VendorAppBar(),
           ];
         },
-        body: Column(
+        body: ListView(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           children: [
             VendorBanner(),
-            Expanded(
-              child: VendorCategories(),
-            ),
+            VendorCategories(),
+            RecentltAddedProduct(),
+            FeaturedProducts(),
+            BestSellingProducts(),
           ],
         ),
       ),

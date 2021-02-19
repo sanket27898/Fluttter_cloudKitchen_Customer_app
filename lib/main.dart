@@ -1,4 +1,5 @@
 import 'package:first_firebase_flutter_project/screens/main_screen.dart';
+
 import 'package:first_firebase_flutter_project/screens/vendor_home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,8 @@ import './screens/map_screen.dart';
 import './provider/auth_provider.dart';
 import './screens/welcome_screen.dart';
 import './screens/home_screen.dart';
-import 'screens/splash_screen.dart';
+import './screens/splash_screen.dart';
+import './screens/product_list_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +59,7 @@ class MyApp extends StatelessWidget {
         LandingScreen.routeName: (ctx) => LandingScreen(),
         MainScreen.routeName: (ctx) => MainScreen(),
         VendorHomeScreen.routeName: (ctx) => VendorHomeScreen(),
+        ProductListScreen.routeName: (ctx) => ProductListScreen(),
       },
     );
   }

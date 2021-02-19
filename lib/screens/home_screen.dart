@@ -5,14 +5,9 @@ import '../widgets/image_slider.dart';
 import '../widgets/my_appbar.dart';
 import '../widgets/top_pick_store.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   static const String routeName = '/homeScreen';
 
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

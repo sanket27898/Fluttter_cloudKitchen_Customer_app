@@ -28,6 +28,7 @@ class _NearByStoresState extends State<NearByStores> {
       latitude = position.latitude;
       longitude = position.longitude;
     });
+
     super.didChangeDependencies();
   }
 
@@ -77,6 +78,7 @@ class _NearByStoresState extends State<NearByStores> {
             var distanceInKm = distance / 1000;
             shopDistance.add(distanceInKm);
           }
+
           shopDistance
               .sort(); //this will sort with nearest distance. if nearest distance is more
           if (shopDistance[0] > 2) {
