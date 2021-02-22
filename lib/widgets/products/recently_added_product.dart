@@ -1,17 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:first_firebase_flutter_project/provider/store_provider.dart';
 import 'package:first_firebase_flutter_project/services/product_services.dart';
 import 'package:first_firebase_flutter_project/widgets/products/product_card_widget.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RecentltAddedProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProductServices _services = ProductServices();
+    var _store = Provider.of<StoreProvider>(context);
+
     return FutureBuilder<QuerySnapshot>(
       future: _services.products
           .where('published', isEqualTo: true)
           .where('collection', isEqualTo: 'recently added')
+          .where('seller.sellerUid', isEqualTo: _store.storeDetails['uid'])
           .orderBy('productName')
           .limitToLast(10)
           .get(),
@@ -20,10 +25,8 @@ class RecentltAddedProduct extends StatelessWidget {
           return Text('Something went wrong');
         }
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+        if (!snapshot.hasData) {
+          return Container();
         }
         if (snapshot.data.docs.isEmpty) {
           return Container(); //if no data

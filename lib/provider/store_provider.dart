@@ -19,6 +19,7 @@ class StoreProvider with ChangeNotifier {
   DocumentSnapshot storeDetails;
   String distance;
   String selectedProductCategory;
+  String selectedProductSubCategory;
 
   getSelectedStore(storeDetails, distance) {
     this.storeDetails = storeDetails;
@@ -28,6 +29,12 @@ class StoreProvider with ChangeNotifier {
 
   selectedCategory(category) {
     this.selectedProductCategory = category;
+
+    notifyListeners();
+  }
+
+  selectedSubCategory(subCategory) {
+    this.selectedProductSubCategory = subCategory;
 
     notifyListeners();
   }

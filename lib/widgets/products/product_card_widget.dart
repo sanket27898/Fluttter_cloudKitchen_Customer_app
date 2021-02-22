@@ -50,25 +50,26 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10, right: 10, top: 3, bottom: 3),
-                    child: Text(
-                      '$offer %OFF',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
+                if (document.data()['comparedPrice'] > 0)
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, right: 10, top: 3, bottom: 3),
+                      child: Text(
+                        '$offer %OFF',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
-                  ),
-                )
+                  )
               ],
             ),
             Padding(

@@ -39,6 +39,7 @@ class _VendorCategoriesState extends State<VendorCategories> {
   @override
   Widget build(BuildContext context) {
     var _storeProvider = Provider.of<StoreProvider>(context);
+
     return FutureBuilder(
       future: _services.category.get(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -107,6 +108,7 @@ class _VendorCategoriesState extends State<VendorCategories> {
                             print(document.data()['name']);
                             _storeProvider
                                 .selectedCategory(document.data()['name']);
+                            _storeProvider.selectedSubCategory(null);
                             pushNewScreenWithRouteSettings(
                               context,
                               settings: RouteSettings(
@@ -131,6 +133,7 @@ class _VendorCategoriesState extends State<VendorCategories> {
                                 children: [
                                   Container(
                                     height: 100,
+                                    width: double.infinity,
                                     child: Image.network(
                                       document.data()['image'],
                                       fit: BoxFit.cover,

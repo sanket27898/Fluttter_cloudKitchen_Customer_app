@@ -18,38 +18,24 @@ class NearByStores extends StatefulWidget {
 }
 
 class _NearByStoresState extends State<NearByStores> {
-  double latitude = 0.0;
-  double longitude = 0.0;
-
-  @override
-  void didChangeDependencies() {
-    final _storeData = Provider.of<StoreProvider>(context);
-    _storeData.determinePosition().then((position) {
-      latitude = position.latitude;
-      longitude = position.longitude;
-    });
-
-    super.didChangeDependencies();
-  }
-
-  String getDistance(location) {
-    var distance = Geolocator.distanceBetween(
-      latitude,
-      longitude,
-      location.latitude,
-      location.longitude,
-    );
-    var distanceInKm = distance / 1000; //this will show in kilometer
-    return distanceInKm.toStringAsFixed(2);
-  }
-
   StoreServices _storeServices = StoreServices();
   PaginateRefreshedChangeListener refreshedChangeListener =
       PaginateRefreshedChangeListener();
   @override
   Widget build(BuildContext context) {
     final _storeData = Provider.of<StoreProvider>(context);
-    // _storeData.getUserLoactionData(context);
+    _storeData.getUserLoactionData(context);
+
+    String getDistance(location) {
+      var distance = Geolocator.distanceBetween(
+        _storeData.userLatitude,
+        _storeData.userLongitude,
+        location.latitude,
+        location.longitude,
+      );
+      var distanceInKm = distance / 1000; //this will show in kilometer
+      return distanceInKm.toStringAsFixed(2);
+    }
 
     return Container(
       color: Colors.white,
@@ -70,8 +56,8 @@ class _NearByStoresState extends State<NearByStores> {
           List shopDistance = [];
           for (int i = 0; i < snapShort.data.docs.length; i++) {
             var distance = Geolocator.distanceBetween(
-              latitude,
-              longitude,
+              _storeData.userLatitude,
+              _storeData.userLongitude,
               snapShort.data.docs[i]['location'].latitude,
               snapShort.data.docs[i]['location'].longitude,
             );
