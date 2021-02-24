@@ -1,7 +1,9 @@
 import 'package:first_firebase_flutter_project/screens/main_screen.dart';
+import 'package:first_firebase_flutter_project/screens/product_details_screen.dart';
 
 import 'package:first_firebase_flutter_project/screens/vendor_home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:provider/provider.dart';
 
@@ -60,7 +62,9 @@ class MyApp extends StatelessWidget {
         MainScreen.routeName: (ctx) => MainScreen(),
         VendorHomeScreen.routeName: (ctx) => VendorHomeScreen(),
         ProductListScreen.routeName: (ctx) => ProductListScreen(),
+        ProductdetailsScreen.routeName: (ctx) => ProductdetailsScreen(),
       },
+      builder: EasyLoading.init(),
     );
   }
 }

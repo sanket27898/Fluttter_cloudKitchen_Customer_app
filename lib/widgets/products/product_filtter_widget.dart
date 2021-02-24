@@ -54,7 +54,7 @@ class _ProductFilterWidgetState extends State<ProductFilterWidget> {
           Map<String, dynamic> data = snapshot.data.data();
           return Container(
             height: 50,
-            color: Colors.grey,
+            color: Colors.grey[400],
             child: Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: ListView(
@@ -80,8 +80,8 @@ class _ProductFilterWidgetState extends State<ProductFilterWidget> {
                       scrollDirection: Axis.horizontal,
                       physics: ScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
-                        print('sanket11');
-                        print('${data['subCat'][index]['name']}');
+                        // print('sanket11');
+                        // print('${data['subCat'][index]['name']}');
                         return Padding(
                           padding: const EdgeInsets.only(left: 10),
                           child: _subCatList

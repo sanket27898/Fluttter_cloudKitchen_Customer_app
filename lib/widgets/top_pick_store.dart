@@ -102,7 +102,7 @@ class _TopPickStoreState extends State<TopPickStore> {
                             //u can increase or discrease the distance
                             return InkWell(
                               onTap: () {
-                                print(document['uid']);
+                                // print(document['uid']);
                                 _storeData.getSelectedStore(document,
                                     getDistance(document['location']));
 

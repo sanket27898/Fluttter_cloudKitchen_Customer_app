@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:first_firebase_flutter_project/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class ProductCard extends StatelessWidget {
   final DocumentSnapshot document;
@@ -38,14 +40,33 @@ class ProductCard extends StatelessWidget {
                 Material(
                   elevation: 6,
                   borderRadius: BorderRadius.circular(10),
-                  child: SizedBox(
-                    height: 140,
-                    width: 130,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        document.data()['productImage'],
-                        fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () {
+                      print(document.data()['productId']);
+                      pushNewScreenWithRouteSettings(
+                        context,
+                        settings:
+                            RouteSettings(name: ProductdetailsScreen.routeName),
+                        screen: ProductdetailsScreen(
+                          document: document,
+                        ),
+                        withNavBar: false,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino,
+                      );
+                    },
+                    child: SizedBox(
+                      height: 140,
+                      width: 130,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Hero(
+                          tag: 'product ${document.data()['productName']}',
+                          child: Image.network(
+                            document.data()['productImage'],
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
                   ),

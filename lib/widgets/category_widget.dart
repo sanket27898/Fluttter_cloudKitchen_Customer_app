@@ -25,12 +25,14 @@ class _VendorCategoriesState extends State<VendorCategories> {
         .get()
         .then((QuerySnapshot querySnapshot) => {
               querySnapshot.docs.forEach((doc) {
-                print(doc["category"]['mainCategory']);
+                // print(doc["category"]['mainCategory']);
                 //add all this in a list
-
-                setState(() {
-                  _catList.add(doc['category']['mainCategory']);
-                });
+                if (mounted) {
+                  //! this line is Added by me..for dipose the setstate
+                  setState(() {
+                    _catList.add(doc['category']['mainCategory']);
+                  });
+                }
               }),
             });
     super.didChangeDependencies();

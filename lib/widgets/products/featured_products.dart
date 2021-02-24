@@ -31,7 +31,7 @@ class FeaturedProducts extends StatelessWidget {
         if (snapshot.data.docs.isEmpty) {
           return Container(); //if no data
         }
-        print(snapshot.data);
+        // print(snapshot.data);
         return Column(
           children: [
             Padding(

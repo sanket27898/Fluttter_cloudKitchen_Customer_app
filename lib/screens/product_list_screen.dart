@@ -24,10 +24,10 @@ class ProductListScreen extends StatelessWidget {
             iconTheme: IconThemeData(color: Colors.white),
             expandedHeight: 110,
             flexibleSpace: Padding(
-              padding: const EdgeInsets.only(top: 88),
+              padding: EdgeInsets.only(top: 88),
               child: Container(
                 height: 56,
-                color: Colors.grey,
+                color: Theme.of(context).primaryColor,
                 child: ProductFilterWidget(),
               ),
             ),
