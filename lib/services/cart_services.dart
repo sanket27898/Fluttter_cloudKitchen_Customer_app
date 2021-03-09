@@ -9,6 +9,7 @@ class CartServices {
     cart.doc(user.uid).set({
       'user': user.uid,
       'sellerUid': document.data()['seller']['sellerUid'],
+      'shopName': document.data()['seller']['shopName'],
     });
     return cart.doc(user.uid).collection('products').add({
       'productId': document.data()['productId'],
@@ -57,5 +58,19 @@ class CartServices {
     if (snapshot.docs.length == 0) {
       cart.doc(user.uid).delete();
     }
+  }
+
+  Future<void> deleteCart() async {
+    final result =
+        await cart.doc(user.uid).collection('products').get().then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.docs) {
+        ds.reference.delete();
+      }
+    });
+  }
+
+  Future<String> checkSeller() async {
+    final snapshot = await cart.doc(user.uid).get();
+    return snapshot.exists ? snapshot.data()['shopName'] : null;
   }
 }
