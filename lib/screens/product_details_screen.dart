@@ -10,7 +10,7 @@ class ProductdetailsScreen extends StatelessWidget {
   static const String routeName = '/product_screen';
 
   final DocumentSnapshot document;
-  ProductdetailsScreen({@required this.document});
+  ProductdetailsScreen({this.document});
 
   @override
   Widget build(BuildContext context) {

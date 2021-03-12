@@ -51,7 +51,7 @@ class AuthProvider with ChangeNotifier {
     };
 
     final PhoneCodeSent smsOtpSend = (String verId, int resendToken) async {
-      print(" smsOtpSend sanket");
+      // print(" smsOtpSend sanket");
       this.verificationId = verId;
       // open dialog to enter received OTP SMS
       smsOtpDialog(context, number);
@@ -131,13 +131,14 @@ class AuthProvider with ChangeNotifier {
                             if (snapShot.data()['address' != null]) {
                               Navigator.pushReplacementNamed(
                                   context, MainScreen.routeName);
+                              notifyListeners();
                             }
                             Navigator.pushReplacementNamed(
                                 context, LandingScreen.routeName);
                           } else {
                             //need to update new selected address
-                            print(
-                                '${locationData.latitude}:${locationData.longitude}');
+                            // print(
+                            //     '${locationData.latitude}:${locationData.longitude}');
                             updateUser(id: user.uid, number: user.phoneNumber);
                             Navigator.pushReplacementNamed(
                                 context, MainScreen.routeName);
@@ -150,9 +151,11 @@ class AuthProvider with ChangeNotifier {
                               context, LandingScreen.routeName);
                         }
                       });
+                      notifyListeners(); //!
                     } else {
                       print('Login failed');
                     }
+                    notifyListeners(); //!
                   } catch (e) {
                     this.error = 'Invalid OTP';
                     print(e.toString());
@@ -175,7 +178,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   void _createUser({String id, String number}) {
-    print("_create User");
+    // print("_create User");
     _userServices.createUserData({
       'id': id,
       'number': number,
@@ -204,6 +207,7 @@ class AuthProvider with ChangeNotifier {
       return true;
     } catch (e) {
       print('Error $e');
+      notifyListeners();
       return false;
     }
   }

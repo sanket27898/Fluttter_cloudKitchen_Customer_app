@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_firebase_flutter_project/provider/store_provider.dart';
 import 'package:first_firebase_flutter_project/services/product_services.dart';
 import 'package:first_firebase_flutter_project/widgets/products/product_card_widget.dart';
-import 'package:first_firebase_flutter_project/widgets/products/product_filtter_widget.dart';
+// import 'package:first_firebase_flutter_project/widgets/products/product_filtter_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

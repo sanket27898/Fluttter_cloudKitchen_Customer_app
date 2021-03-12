@@ -1,3 +1,4 @@
+import 'package:first_firebase_flutter_project/widgets/cart/cart_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -55,6 +56,11 @@ class MainScreen extends StatelessWidget {
     }
 
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 56),
+        child: CartNotofication(),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: PersistentTabView(
         context,
         navBarHeight: 56,

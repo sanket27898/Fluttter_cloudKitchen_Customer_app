@@ -1,3 +1,4 @@
+import 'package:first_firebase_flutter_project/screens/cart_screen.dart';
 import 'package:first_firebase_flutter_project/screens/main_screen.dart';
 import 'package:first_firebase_flutter_project/screens/product_details_screen.dart';
 
@@ -19,6 +20,7 @@ import './screens/welcome_screen.dart';
 import './screens/home_screen.dart';
 import './screens/splash_screen.dart';
 import './screens/product_list_screen.dart';
+import './provider/cart_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +36,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (ctx) => StoreProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => CartProvider(),
         ),
       ],
       child: MyApp(),
@@ -63,6 +68,7 @@ class MyApp extends StatelessWidget {
         VendorHomeScreen.routeName: (ctx) => VendorHomeScreen(),
         ProductListScreen.routeName: (ctx) => ProductListScreen(),
         ProductdetailsScreen.routeName: (ctx) => ProductdetailsScreen(),
+        CartScreen.routeName: (ctx) => CartScreen(),
       },
       builder: EasyLoading.init(),
     );

@@ -107,7 +107,7 @@ class _VendorCategoriesState extends State<VendorCategories> {
                       ? //only if _catList contain the category from selected vendor
                       InkWell(
                           onTap: () {
-                            print(document.data()['name']);
+                            // print(document.data()['name']);
                             _storeProvider
                                 .selectedCategory(document.data()['name']);
                             _storeProvider.selectedSubCategory(null);

@@ -52,8 +52,9 @@ class _CounterWidgetState extends State<CounterWidget> {
                             setState(() {
                               _qty--;
                             });
+                            var total = _qty * widget.document.data()['price'];
                             _cart
-                                .updateCartQty(widget.docId, _qty)
+                                .updateCartQty(widget.docId, _qty, total)
                                 .then((value) {
                               setState(() {
                                 _updating = false;
@@ -102,7 +103,10 @@ class _CounterWidgetState extends State<CounterWidget> {
                             _updating = true;
                             _qty++;
                           });
-                          _cart.updateCartQty(widget.docId, _qty).then((value) {
+                          var total = _qty * widget.document.data()['price'];
+                          _cart
+                              .updateCartQty(widget.docId, _qty, total)
+                              .then((value) {
                             setState(() {
                               _updating = false;
                             });
